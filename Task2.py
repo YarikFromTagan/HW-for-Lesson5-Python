@@ -12,37 +12,59 @@ import os
 import random
 os.system('cls')
 
+def game_selection():
+    valid = False
+    while not valid:
+        game = input('Human vs Human --> введите 1\nHuman vs Bot --> введите 2\n\n--> ')
+        try:
+            game = int(game)
+        except:
+            print('\n!!! Нужно ввести число !!!')
+            continue
+        if game == 1:
+            hum_hum(rest)
+            valid = True
+        elif game == 2:
+            hum_bot(rest)
+            valid = True
+        else: print('\nНужно ввести либо 1, либо 2\n')
+
 def rand_step(min, max ):
     rnd_stp = random.randint(min, max)
     return rnd_stp
 
 def draw_h_b():
     os.system('cls')
-    print('Сейчас узнаем, кто сделает первый ход\n')
-    input('Для броска кубиков нажмите Enter')
-    cube_1 = rand_step(1, 6)
-    cube_2 = rand_step(1, 6)
-    resut_player = cube_1 + cube_2
-    print(f'У Вас выпало [{cube_1} : {cube_2}] итого: {resut_player}\n')
-    input('Теперь мой бросок. Нажмите пожалуйста Enter')
-    cube_3 = rand_step(1, 6)
-    cube_4 = rand_step(1, 6)
-    resut_bot = cube_3 + cube_4
-    print(f'А у меня выпало [{cube_3} : {cube_4}] итого: {resut_bot}\n')
-    if resut_player > resut_bot:
-        print('Поздравляю. Вы ходите первым!!!\n')
-        input('Нажмите Enter')
-        os.system('cls')
-        return -1
-    else:
-        print('Первый ход за мной\n')
-        input('Нажмите Enter')
-        os.system('cls')
-        return 1
+    print('Сейчас узнаем, кто сделает первый ход\nДля этого бросим два игральных кубика\n')
+    valid = False
+    while not valid:
+        input('Для броска своих кубиков нажмите Enter')
+        cube_1 = rand_step(1, 6)
+        cube_2 = rand_step(1, 6)
+        resut_player = cube_1 + cube_2
+        print(f'\nУ Вас выпало [{cube_1} : {cube_2}] итого: {resut_player}\n')
+        input('Теперь мой бросок.\nНажмите пожалуйста Enter')
+        cube_3 = rand_step(1, 6)
+        cube_4 = rand_step(1, 6)
+        resut_bot = cube_3 + cube_4
+        print(f'\nА у меня выпало [{cube_3} : {cube_4}] итого: {resut_bot}\n')
+        if resut_player > resut_bot:
+            print('Поздравляю. Вы ходите первым!!!\n')
+            input('Нажмите Enter')
+            os.system('cls')
+            valid = True
+            return -1
+        elif resut_player < resut_bot:
+            print('Первый ход за мной\n')
+            input('Нажмите Enter')
+            os.system('cls')
+            valid = True
+            return 1
+        else:
+            input('Упс... Поровну!\nТогда начнём сначала\n\nНажмите Enter')
+            os.system('cls')
 
-
-
-def hum_hum():
+def hum_hum(rest):
     print('пока не готово')
 
 def hum_bot(rest):
@@ -50,8 +72,7 @@ def hum_bot(rest):
     move = draw_h_b()
 
     while rest > 0:
-        print(f'\nНа кону {rest} конфет из {start_rest}')
-        print('Можно взять от 1-й до 28-ми конфет\n')
+        print(f'На кону осталось {rest} конфет из {start_rest}\n')
         if move == 1:
             i = 0
             while i < rest - 29:
@@ -61,14 +82,15 @@ def hum_bot(rest):
             else:
                 comp_take = rest - i
             rest -= comp_take
-            #os.system('cls')
-            print(f'Мой ход: Я беру {comp_take} конфет')
-            #print(f'На кону {rest} конфет из {start_rest}\n')
+            print(f'Мой ход, и я беру {comp_take}\n\n--------------------------\n')
+            
         else:
-            #print(f'На кону {rest} конфет из {start_rest}\n')
-            my_choice = int(input('Ваш ход: \nСколько конфет Вы берёте? '))
+            
+            my_choice = int(input('Ваш ход:\nМожно взять от 1-й до 28-ми конфет\nСколько конфет Вы берёте? --> '))
+            print('--------------------------')
             rest -= my_choice
-            #print(f'\nПосле Вашего хода осталось {rest} конфет\n')
+            os.system('cls')
+            
         move *= -1
 
     if move == -1: print("\nЯ победил!!!!\n")
@@ -77,11 +99,8 @@ def hum_bot(rest):
 
 rest = 120
 print('Приветствую Вас на игре с конфетами!!!\n\nКак будем играть?')
-game = input('Human vs Human --> введите 1\nHuman vs Bot --> введите 2\n\n--> ')
+game_selection()
 
-if int(game) == 1: hum_hum()
-elif int(game) == 2: hum_bot(rest)
-else: print('\nОпределитесь с игрой и начните заново!\n')
 
 
 
