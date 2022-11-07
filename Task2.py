@@ -22,10 +22,10 @@ def game_selection():
             print('\n!!! Нужно ввести число !!!')
             continue
         if game == 1:
-            hum_hum(rest)
+            human_human(rest)
             valid = True
         elif game == 2:
-            hum_bot(rest)
+            human_bot(rest)
             valid = True
         else: print('\nНужно ввести либо 1, либо 2\n')
 
@@ -33,7 +33,7 @@ def rand_step(min, max ):
     rnd_stp = random.randint(min, max)
     return rnd_stp
 
-def draw_h_b():
+def draw_human_bot():
     os.system('cls')
     print('Сейчас узнаем, кто сделает первый ход\nДля этого бросим два игральных кубика\n')
     valid = False
@@ -64,12 +64,12 @@ def draw_h_b():
             input('Упс... Поровну!\nТогда начнём сначала\n\nНажмите Enter')
             os.system('cls')
 
-def hum_hum(rest):
+def human_human(rest):
     print('пока не готово')
 
-def hum_bot(rest):
+def human_bot(rest):
     start_rest = rest
-    move = draw_h_b()
+    move = draw_human_bot()
 
     while rest > 0:
         print(f'На кону осталось {rest} конфет из {start_rest}\n')
