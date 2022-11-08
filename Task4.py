@@ -25,12 +25,16 @@ def recov(arh): #восстановление данных
 with open('intext.txt', 'r') as f:
     st = f.read()
 
-print(st)
+print(st, '- входные данные из intext.txt')
+print('\n')
+
 rle = compress(st)
-print(rle)
+print(rle, '- сжатые данные')
+print('\n')
 
 exp = recov(rle)
-print(exp)
+print(exp, '- восстановленные данные записаны outtext.txt')
+print('\n')
 
 with open('outtext.txt', 'w') as f:
     f.write(exp)
