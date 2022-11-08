@@ -35,7 +35,7 @@ def rand_step(min, max ):
 
 def draw_human_bot():
     os.system('cls')
-    print('Сейчас узнаем, кто сделает первый ход\nДля этого бросим два игральных кубика\n')
+    print('Сейчас мы узнаем, кто сделает первый ход\nДля этого бросим два игральных кубика\n')
     valid = False
     while not valid:
         input('Для броска своих кубиков нажмите Enter')
@@ -85,19 +85,28 @@ def human_bot(rest):
             print(f'Мой ход, и я беру {comp_take}\n\n--------------------------\n')
             
         else:
-            
-            my_choice = int(input('Ваш ход:\nМожно взять от 1-й до 28-ми конфет\nСколько конфет Вы берёте? --> '))
-            print('--------------------------')
-            rest -= my_choice
-            os.system('cls')
-            
+            valid = False
+            while not valid:
+                my_choice = input('Ваш ход:\nМожно взять от 1-й до 28-ми конфет\nСколько конфет Вы берёте? --> ')
+                print('--------------------------')
+                try:
+                    my_choice = int(my_choice)
+                except:
+                    print('\n!!! Нужно ввести число !!!')
+                    continue
+                if my_choice >= 1 and my_choice <= 28:
+                    rest -= my_choice
+                    valid = True
+                    os.system('cls')
+                else:
+                    print('Напоминаю!!!')
         move *= -1
 
     if move == -1: print("\nЯ победил!!!!\n")
     else: print("\nВы победили!!!!\n")
 
 
-rest = 120
+rest = 120 # Количество конфет на кону
 print('Приветствую Вас на игре с конфетами!!!\n\nКак будем играть?')
 game_selection()
 
