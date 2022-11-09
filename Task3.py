@@ -23,6 +23,7 @@ def take_input(player_token):
         if player_answer >= 1 and player_answer <= 9:
             if (str(board[player_answer-1]) not in "XO"):
                 board[player_answer-1] = player_token
+                os.system('cls')
                 valid = True
             else:
                 print ('Эта клеточка уже занята')
@@ -49,14 +50,15 @@ def main(board):
         if counter > 4:
             tmp = check_win(board)
             if tmp:
-                print (f'\n{tmp}-ки выиграли!')
+                draw_board(board)
+                print (f'\n{tmp}-ки выиграли!\n')
                 win = True
                 break
         if counter == 9:
-            print ('\nНичья!')
+            draw_board(board)
+            print ('Ничья!\n')
             break
-    draw_board(board)
-
+    
 main(board)
 
 
